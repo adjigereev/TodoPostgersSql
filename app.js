@@ -2,7 +2,8 @@ let express = require('express');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 const sequelize = require('./db/config')
-let indexRouter = require('./routes/index');
+let commentRouter = require('./routes/comment.router');
+let todosRouter = require('./routes/todo.router');
 
 
 let app = express();
@@ -13,7 +14,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/comment', commentRouter);
+app.use('/todos', todosRouter);
+
 
 
 

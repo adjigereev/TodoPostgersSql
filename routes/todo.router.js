@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 let Todos = require('../controllers/todoController')
 /* GET users listing. */
 router.post('/', Todos.addTodo);
