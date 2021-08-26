@@ -29,7 +29,7 @@ const comment = sequelize.define('Comment',{
         allowNull: false,
     }
 })
-const commentOnComment = sequelize.define('comment_on_comment',{
+const commentOnComment = sequelize.define('Comment_on_comment',{
     id:{
         type: Sequelize.INTEGER,
         autoIncrement: true,
