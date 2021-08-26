@@ -16,7 +16,7 @@ class Todos {
     async allTodo(req, res) {
         todo.findAll({
             include: [
-                {model: comment, required: true}
+                {model: comment, required: false}
             ],
         })
             .then((data) => {

@@ -1,16 +1,34 @@
-const {comment}= require('../db/todo.model')
-class CommentController{
-    async addComment (req,res){
+const {comment, commentOnComment} = require('../db/todo.model')
+
+class CommentController {
+    async addComment(req, res) {
         try {
-            await  comment.create({
-                description:req.body.description,
-                todoId:req.body.todoId
-            }).then((data)=>res.json(data).status(201))
-            console.log(req.body.description)
-        }catch (e){
+            comment.create({
+                description: req.body.description,
+                TodoId: req.body.TodoId
+            }).then((data) => res.json(data).status(201))
+        } catch (e) {
             res.json(e.message).status(500)
         }
+        console.log(req.body.TodoId)
+    }
+    allComment(req,res){
+        comment.findAll({
+            include: [
+                {model: commentOnComment, required: false}
+            ],
+        }).then(data =>res.json(data))
     }
 
+    addCommentOnComment(req, res) {
+        commentOnComment.create({
+            description: req.body.description,
+            CommentId: req.body.CommentId
+        }).then((data) => res.json(data).status(201))
+            .catch(err => console.log(err))
+    }
+
+
 }
+
 module.exports = new CommentController()
