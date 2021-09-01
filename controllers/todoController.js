@@ -21,7 +21,7 @@ class Todos {
             include: [
                 {
                     model: comment, required: false,
-                    include:comment
+                    include: comment
                 },
 
             ],
