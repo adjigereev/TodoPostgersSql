@@ -10,18 +10,14 @@ class CommentController {
         } catch (e) {
             res.json(e.message).status(500)
         }
-        console.log(req.body.TodoId)
     }
     allComment(req,res){
         comment.findAll({
-            include: [
-                {model: commentOnComment, required: false}
-            ],
         }).then(data =>res.json(data))
     }
 
     addCommentOnComment(req, res) {
-        commentOnComment.create({
+        comment.create({
             description: req.body.description,
             CommentId: req.body.CommentId
         }).then((data) => res.json(data).status(201))

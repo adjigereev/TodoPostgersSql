@@ -17,37 +17,37 @@ const todo = sequelize.define('Todos', {
         allowNull: false
     }
 });
-const comment = sequelize.define('Comment',{
-    id:{
+const comment = sequelize.define('Comment', {
+    id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false
     },
-    description:{
+    description: {
         type: Sequelize.STRING,
         allowNull: false,
     }
 })
-const commentOnComment = sequelize.define('Comment_on_comment',{
-    id:{
+const commentOnComment = sequelize.define('Comment_on_comment', {
+    id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
         allowNull: false
     },
-    description:{
+    description: {
         type: Sequelize.STRING,
         allowNull: false,
     }
 })
 
-todo.hasMany(comment , { onDelete: 'cascade'})
+todo.hasMany(comment, {onDelete: 'cascade'})
 comment.belongsTo(todo)
 
-comment.hasMany(commentOnComment)
-commentOnComment.belongsTo(comment)
+comment.belongsTo(comment)
 
+// commentOnComment.belongsTo(comment)
 module.exports = {
     todo,
     comment,
