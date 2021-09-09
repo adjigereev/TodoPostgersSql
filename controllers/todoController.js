@@ -1,5 +1,8 @@
-const {comment} = require("../db/todo.model");
-const {todo} = require('../db/todo.model')
+const {
+    comment
+    , commentOnComment
+    , todo
+} = require("../db/todo.model");
 
 class Todos {
     async addTodo(req, res) {
@@ -16,7 +19,11 @@ class Todos {
     async allTodo(req, res) {
         todo.findAll({
             include: [
-                {model: comment, required: true}
+                {
+                    model: comment, required: false,
+                    include: comment
+                },
+
             ],
         })
             .then((data) => {
