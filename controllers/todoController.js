@@ -1,7 +1,6 @@
 const {
-    comment
-    , commentOnComment
-    , todo
+    comment,
+    todo
 } = require("../db/todo.model");
 
 class Todos {
@@ -21,7 +20,7 @@ class Todos {
             include: [
                 {
                     model: comment, required: false,
-                    include: comment
+                    include: [{model:comment}]
                 },
 
             ],

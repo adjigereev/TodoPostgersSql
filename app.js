@@ -4,6 +4,7 @@ let logger = require('morgan');
 const sequelize = require('./db/config')
 let commentRouter = require('./routes/comment.router');
 let todosRouter = require('./routes/todo.router');
+let uploadRouter = require('./routes/fileUpload.router');
 
 
 let app = express();
@@ -16,6 +17,7 @@ app.use(cookieParser());
 
 app.use('/comment', commentRouter);
 app.use('/todos', todosRouter);
+app.use('/upload', uploadRouter);
 
 
 sequelize.sync().then(() => {

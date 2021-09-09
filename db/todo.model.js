@@ -29,12 +29,30 @@ const comment = sequelize.define('Comment', {
         allowNull: false,
     }
 })
+const uploadFile = sequelize.define('Images', {
+    id:{
+        type:Sequelize.INTEGER,
+        primaryKey:true,
+        autoIncrement:true,
+        allowNull:false
+    },
+    fileScr:{
+        type:Sequelize.STRING,
+        allowNull:false
+    }
+})
+
 
 todo.hasMany(comment, {onDelete: 'cascade'})
 comment.belongsTo(todo)
 
+comment.hasMany(uploadFile,{onDelete:'cascade'})
+uploadFile.belongsTo(comment)
+
+comment.hasMany(comment ,{onDelete:'cascade'})
 comment.belongsTo(comment)
 module.exports = {
     todo,
     comment,
+    uploadFile
 }
