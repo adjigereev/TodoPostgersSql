@@ -1,4 +1,4 @@
-const {comment, commentOnComment} = require('../db/todo.model')
+const {comment} = require('../db/todo.model')
 
 class CommentController {
     async addComment(req, res) {
