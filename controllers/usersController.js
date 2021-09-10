@@ -35,9 +35,7 @@ class User {
         res.json(token).status(300)
         console.log(req.user)
     }
-    async check(req,res){
-        res.json("Путь до check работает").status(201)
-    }
+
 }
 
 module.exports = new User()

@@ -2,6 +2,7 @@ const {
     comment,
     todo
 } = require("../db/todo.model");
+const user = require('../db/user.model')
 
 class Todos {
     async addTodo(req, res) {
@@ -20,9 +21,12 @@ class Todos {
             include: [
                 {
                     model: comment, required: false,
-                    include: [{model:comment}]
+                    include: [
+                        {
+                            model: comment, required: false,
+                        }
+                    ]
                 },
-
             ],
         })
             .then((data) => {

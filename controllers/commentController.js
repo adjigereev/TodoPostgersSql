@@ -6,7 +6,8 @@ class CommentController {
             comment.create({
                 description: req.body.description,
                 TodoId: req.body.TodoId,
-                CommentId: req.body.CommentId
+                CommentId: req.body.CommentId,
+                UserId: req.user.id
             }).then((data) => res.json(data).status(201))
         } catch (e) {
             res.json(e.message).status(500)
@@ -17,5 +18,6 @@ class CommentController {
         comment.findAll({}).then(data => res.json(data))
     }
 }
+
 
 module.exports = new CommentController()
