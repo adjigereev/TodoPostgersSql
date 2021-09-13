@@ -38,10 +38,14 @@ class Todos {
     }
 
     async deleteTodo(req, res) {
-        const userId = req.params.id
-        todo.destroy({where: {id: userId}}).then(() => {
-            res.sendStatus(200)
-        }).catch(err => console.log(err))
+        const todoId = req.params.id
+        if(todo.UserId === req.user.id){
+            todo.destroy({where: {id: todoId}}).then(() => {
+                res.sendStatus(200)
+            }).catch(err => console.log(err))
+        }else{
+            res.json("У вас нет прав на удаление данной задани").status(403)
+        }
     }
 }
 

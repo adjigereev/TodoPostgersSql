@@ -6,5 +6,5 @@ const {checkUser} = require('../middleware/authmiddleware')
 router.post('/', checkUser,Todos.addTodo);
 router.get('/', Todos.allTodo);
 router.put('/:id', Todos.editTodo)
-router.delete('/:id', Todos.deleteTodo)
+router.delete('/:id',checkUser, Todos.deleteTodo)
 module.exports = router;
