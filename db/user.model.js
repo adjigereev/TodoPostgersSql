@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const sequelize = require('./config')
-const {comment} = require('./todo.model')
+const {comment,todo} = require('./todo.model')
 
 const user = sequelize.define('User', {
     id: {
@@ -19,9 +19,11 @@ const user = sequelize.define('User', {
     password: {
         type: Sequelize.STRING,
         minLength: 3,
-        maxLength: 16,
+        maxLength: 16
     }
 })
 user.hasMany(comment)
 comment.belongsTo(user)
+user.hasMany(todo)
+todo.belongsTo(user)
 module.exports = user

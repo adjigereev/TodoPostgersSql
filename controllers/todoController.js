@@ -8,7 +8,8 @@ class Todos {
     async addTodo(req, res) {
         try {
             await todo.create({
-                name: req.body.name
+                name: req.body.name,
+                UserId:req.user.id
             })
         } catch (error) {
             res.json(error.msg).status(500)
@@ -20,12 +21,8 @@ class Todos {
         todo.findAll({
             include: [
                 {
-                    model: comment, required: false,
-                    include: [
-                        {
-                            model: comment, required: false,
-                        }
-                    ]
+                    model: user,
+                    attributes:{exclude:['password']}
                 },
             ],
         })
