@@ -33,7 +33,6 @@ class User {
         if (!hashPassword) return res.status(401).json('Пароль не верный')
         const token = await generatorToken(userSelect.id, userSelect.login)
         res.json(token).status(300)
-        console.log(req.user)
     }
 
 }
