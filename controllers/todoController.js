@@ -42,15 +42,11 @@ class Todos {
 
     async deleteTodo(req, res) {
         const todoId = req.params.id
-        if (await examination({paramsId: todoId, table: todo, userId: req.user.id})) {
-            try {
-                await todo.destroy({where: {id: todoId}})
-                res.sendStatus(200)
-            } catch (e) {
-                res.json(e.message).status(500)
-            }
-        } else {
-            res.json("У вас нет доступа")
+        try {
+            await todo.destroy({where: {id: todoId}})
+            res.sendStatus(200)
+        } catch (e) {
+            res.json(e.message).status(500)
         }
     }
 }

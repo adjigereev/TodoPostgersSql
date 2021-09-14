@@ -24,9 +24,19 @@ let checkUser = async (req, res, next) => {
     }
 }
 
-
+const checkRestriction = (table) => {
+    return async function (req, res, next) {
+        const UserIdTable = await table.findOne({where: {id: req.params.id}})
+        if (UserIdTable.UserId === req.user.id) {
+            next()
+        } else {
+            res.json("У вас нет прав").status(403)
+        }
+    }
+}
 
 module.exports = {
     userName,
-    checkUser
+    checkUser,
+    checkRestriction
 }
