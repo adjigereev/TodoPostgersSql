@@ -44,9 +44,8 @@ class Todos {
         const todoId = req.params.id
         if (await examination({paramsId: todoId, table: todo, userId: req.user.id})) {
             try {
-                await todo.destroy({where: {id: todoId}}).then(() => {
-                    res.sendStatus(200)
-                })
+                await todo.destroy({where: {id: todoId}})
+                res.sendStatus(200)
             } catch (e) {
                 res.json(e.message).status(500)
             }

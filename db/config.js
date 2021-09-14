@@ -6,6 +6,7 @@ const sequelize = new Sequelize("TodoList", "postgres", "admin", {
     host: "localhost",
     define: {
       timestamps: false
-    }
+    },
+    logging: false
   });
 module.exports = sequelize 
