@@ -5,6 +5,7 @@ const sequelize = require('./db/config')
 let commentRouter = require('./routes/comment.router');
 let todosRouter = require('./routes/todo.router');
 let uploadRouter = require('./routes/fileUpload.router');
+let userRouter = require('./routes/userRouter');
 
 
 let app = express();
@@ -18,6 +19,7 @@ app.use(cookieParser());
 app.use('/comment', commentRouter);
 app.use('/todos', todosRouter);
 app.use('/upload', uploadRouter);
+app.use('/auth', userRouter);
 
 
 sequelize.sync().then(() => {

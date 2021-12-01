@@ -1,13 +1,15 @@
 const {
-    comment,
-    todo
+    todo, comment
 } = require("../db/todo.model");
+const user = require('../db/user.model')
+const examination = require("../middleware/userMiddleware");
 
 class Todos {
     async addTodo(req, res) {
         try {
             await todo.create({
-                name: req.body.name
+                name: req.body.name,
+                UserId: req.user.id
             })
         } catch (error) {
             res.json(error.msg).status(500)
@@ -16,31 +18,36 @@ class Todos {
     }
 
     async allTodo(req, res) {
-        todo.findAll({
+        let todos = await todo.findAll({
             include: [
                 {
-                    model: comment, required: false,
-                    include: [{model:comment}]
+                    model: user,
+                    attributes: {exclude: ['password']},
                 },
-
             ],
         })
-            .then((data) => {
-                res.json(data).status(200)
-            })
+        res.json(todos).status(200)
     }
 
     async editTodo(req, res) {
         const userId = req.params.id
         const todos = await todo.findOne({where: {id: userId}})
-        todo.update({payload: !todos.dataValues.payload}, {where: {id: userId}}).then((data) => res.json(data).status(200)).catch(err => console.log(err))
+        try {
+            let editTodo = await todo.update({payload: !todos.dataValues.payload}, {where: {id: userId}})
+            res.json(editTodo).status(200)
+        } catch (e) {
+            res.json(e.message).status(500)
+        }
     }
 
     async deleteTodo(req, res) {
-        const userId = req.params.id
-        todo.destroy({where: {id: userId}}).then(() => {
+        const todoId = req.params.id
+        try {
+            await todo.destroy({where: {id: todoId}})
             res.sendStatus(200)
-        }).catch(err => console.log(err))
+        } catch (e) {
+            res.json(e.message).status(500)
+        }
     }
 }
 
