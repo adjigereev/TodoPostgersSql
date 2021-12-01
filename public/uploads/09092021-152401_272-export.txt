@@ -1,0 +1,4 @@
+Suppliers;	Goods;	food;
+05ru;	Laptops;	kfs;
+DNS; 	phont;	
+05com;	comp;	
